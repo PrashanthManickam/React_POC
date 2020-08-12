@@ -1,0 +1,10 @@
+.MuiCardContent-root {
+    height: 209px;
+}
+
+.MuiTypography-root.MuiCardHeader-title.MuiTypography-h5{
+    font-size: 14px;
+}
+/* .MuiTypography-root.description.MuiTypography-body2{
+    height: 117px;
+} */
