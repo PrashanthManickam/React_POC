@@ -5,7 +5,7 @@ import { fetchProducts } from "../actions";
 import ProductCard from "./ProductCard";
 import Loading from "./Loading";
 import Pagination from "./Pagination";
-import SearchComponent from "./SearchComponent";
+import SideNav from "./SideNav";
 
 class ProductList extends React.Component {
   componentDidMount() {
@@ -41,12 +41,7 @@ class ProductList extends React.Component {
 
     return (
       <div className="details-main-div">
-        <div className="search-bar-div">
-          <SearchComponent
-          // helperFunction={this.helperFunction}
-          />
-        </div>
-
+         <SideNav/>
         <div className="ui relaxed four column grid">
           <div className="row">{renderList}</div>
         </div>
