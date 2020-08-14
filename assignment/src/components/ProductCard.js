@@ -21,7 +21,6 @@ import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // maxWidth: 345
   },
   media: {
     height: 0,
@@ -49,7 +48,6 @@ export default function RecipeReviewCard(props) {
   const handleEdit = (e) => {
     e.preventDefault();
     setEditValue(!editValue);
-    // console.log("editValue", editValue);
   };
 
   return (

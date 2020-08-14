@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchProduct } from "../actions";
 import "./styles.css";
+import Button from '@material-ui/core/Button';
 
 class ProductDetail extends React.Component {
   render() {
@@ -21,9 +22,7 @@ class ProductDetail extends React.Component {
             alt="image"
             width="500"
             height="333"
-            src={
-              "https://images.indianexpress.com/2019/10/Mi-TV_BIG_LEAD.jpg"
-            }
+            src={"https://images.indianexpress.com/2019/10/Mi-TV_BIG_LEAD.jpg"}
           />
           <div className="">
             <a className="header">{productName}</a>
@@ -36,12 +35,10 @@ class ProductDetail extends React.Component {
               <li> Availability: {inStock ? "Available" : "Unavailable"}</li>
             </ul>
           </div>
-          <button
-            className="ui primary basic button"
-            onClick={() => this.props.history.push("/")}
-          >
-            Navigate Back
-          </button>
+          <Button variant="contained" color="primary" component="span"
+           onClick={() => this.props.history.push("/")}>
+          Navigate Back
+        </Button>
         </div>
       </div>
     );
