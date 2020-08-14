@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -14,6 +14,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { red } from "@material-ui/core/colors";
 import Grid from '@material-ui/core/Grid';
 import './ProductCard.css';
+import TextField from "@material-ui/core/TextField";
 
 
 
@@ -43,18 +44,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
+  const [editValue, setEditValue] = useState(true);
 
+  const handleEdit = (e) => {
+    e.preventDefault();
+    setEditValue(!editValue);
+    // console.log("editValue", editValue);
+  };
 
   return (
     <div>
     <Card className={classes.root} >
       <CardHeader className="cardHeader"
        avatar={<Avatar className={classes.avatar}>WM</Avatar>}
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+          action={<MoreVertIcon onClick={(e) => handleEdit(e)} />}
         title={props.productName}
         subheader={props.productId}
       />
@@ -69,12 +72,24 @@ export default function RecipeReviewCard(props) {
         className={classes.media}
         image={props.productImage}
       />
-      <CardContent>
-        <Typography className="description" variant="body2" color="textSecondary" component="p">
-        <div>
-          {props.shortDescription}
-          </div>
-        </Typography>
+       <CardContent>
+          {editValue ? (
+            <Typography
+              className="description"
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            >
+              <div>{props.shortDescription}</div>
+            </Typography>
+          ) : (
+            <TextField
+              style={{ width: "100%" }}
+              id="outlined-basic"
+              variant="outlined"
+              value={props.shortDescription}
+            />
+          )}
         <CardActions
           style={{ flexDirection: "column-reverse" }} >
           <div className="price">{props.price}</div>

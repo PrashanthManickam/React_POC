@@ -32,7 +32,7 @@ class ProductList extends React.Component {
               reviewCount={wmProd.reviewCount}
               reviewRating={wmProd.reviewRating}
               price={wmProd.price}
-              productImage="https://images-na.ssl-images-amazon.com/images/I/81t2A6uhm4L._SX425_.jpg"
+              productImage="https://images.indianexpress.com/2019/10/Mi-TV_BIG_LEAD.jpg"
             />
           </Link>
         </div>

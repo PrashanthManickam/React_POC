@@ -22,7 +22,7 @@ class ProductDetail extends React.Component {
             width="500"
             height="333"
             src={
-              "https://images-na.ssl-images-amazon.com/images/I/81t2A6uhm4L._SX425_.jpg"
+              "https://images.indianexpress.com/2019/10/Mi-TV_BIG_LEAD.jpg"
             }
           />
           <div className="">
