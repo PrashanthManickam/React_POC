@@ -41,8 +41,8 @@ class ProductList extends React.Component {
 
     return (
       <div className="details-main-div">
-         <SideNav/>
         <div className="ui relaxed four column grid">
+             <SideNav/>
           <div className="row">{renderList}</div>
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>

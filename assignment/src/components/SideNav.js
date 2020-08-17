@@ -22,6 +22,17 @@ import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import SearchComponent from "./SearchComponent";
 import rating from "./Rating";
+import FormGroup from "@material-ui/core/FormGroup";
+import Switch from "@material-ui/core/Switch";
+import { fetchInStockProduct } from "../actions";
+import { connect } from "react-redux";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import TextField from "@material-ui/core/TextField";
+import "antd/dist/antd.css";
+import Button from "@material-ui/core/Button";
+import DoneIcon from "@material-ui/icons/Done";
+import ClearIcon from "@material-ui/icons/Clear";
+import { InputNumber } from "antd";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+  },
+  button: {
+    "& > *": {
+      margin: theme.spacing(1)
+    }
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -61,6 +77,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
+  },
+  textField: {
+    width: "24ch",
   },
   content: {
     flexGrow: 1,
@@ -115,7 +134,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
+function onChange(value) {
+  console.log("changed", value);
+}
 function StyledRadio(props) {
   const classes = useStyles();
 
@@ -130,7 +151,7 @@ function StyledRadio(props) {
     />
   );
 }
-export default function PersistentDrawerLeft() {
+function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -143,6 +164,21 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
+  const [value, setValue] = React.useState("{<Rating defaultValue={5} />}");
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+  //toggle
+  const [state, setState] = React.useState({
+    checkedA: true,
+    checkedB: true,
+  });
+
+  const handleToggleChange = (event, props) => {
+    props.fetchInStockProduct();
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -189,44 +225,101 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />
+        <div className="container">
         <List>
           <FormControl component="fieldset">
-            <FormLabel component="legend"> Rating</FormLabel>
+            <FormLabel component="legend">Rating</FormLabel>
             <RadioGroup
-              defaultValue="female"
               aria-label="gender"
-              name="customized-radios"
+              name="gender1"
+              value={value}
+              onChange={handleChange}
             >
               <FormControlLabel
-                value={<Rating defaultValue={5} />}
+                value="{<Rating defaultValue={5} />}"
                 control={<StyledRadio />}
                 label={<Rating defaultValue={5} />}
               ></FormControlLabel>
               <FormControlLabel
-                value={<Rating defaultValue={4} />}
+                value="{<Rating defaultValue={4} />}"
                 control={<StyledRadio />}
                 label={<Rating defaultValue={4} />}
               ></FormControlLabel>
               <FormControlLabel
-                value={<Rating defaultValue={3} />}
+                value="{<Rating defaultValue={3} />}"
                 control={<StyledRadio />}
                 label={<Rating defaultValue={3} />}
               ></FormControlLabel>
               <FormControlLabel
-                value={<Rating defaultValue={2} />}
+                value="{<Rating defaultValue={2} />}"
                 control={<StyledRadio />}
                 label={<Rating defaultValue={2} />}
               ></FormControlLabel>
-               <FormControlLabel
-                value={<Rating defaultValue={1} />}
+              <FormControlLabel
+                value="{<Rating defaultValue={1} />}"
                 control={<StyledRadio />}
                 label={<Rating defaultValue={1} />}
               ></FormControlLabel>
             </RadioGroup>
           </FormControl>
         </List>
+        </div>
         <Divider />
-        <List></List>
+        <div className="container">
+        <List>
+          <FormGroup>
+            <h4>stock</h4>
+            <FormControlLabel
+              control={<Switch />}
+              label="Available"
+              onChange={() => handleToggleChange}
+            />
+          </FormGroup>
+        </List>
+       </div>
+        <Divider />
+        <div className="container">
+        <br />
+        <br />
+        <TextField
+          id="standard-start-adornment"
+          className={clsx(classes.margin, classes.textField)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">REVIEW COUNT</InputAdornment>
+            ),
+          }}
+        />
+        <br />
+        <br />
+        </div>
+        <Divider />
+        <div className="container">
+        <br />
+        <h4>Min price</h4>
+        <InputNumber
+          size="medium"
+          min={0}
+          max={600}
+          defaultValue={0}
+          onChange={onChange}
+        />
+        <h4>Max price</h4>
+        <InputNumber
+          size="medium"
+          min={0}
+          max={600}
+          defaultValue={1}
+          onChange={onChange}
+        />
+        <br />
+        <br />
+        </div>
+        <Divider />
+        <div className={classes.button}>
+          <Button variant="contained" startIcon={<DoneIcon />}></Button>
+          <Button variant="contained" startIcon={<ClearIcon />}></Button>
+        </div>
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -238,3 +331,5 @@ export default function PersistentDrawerLeft() {
     </div>
   );
 }
+
+export default connect(null, { fetchInStockProduct })(PersistentDrawerLeft);

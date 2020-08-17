@@ -24,6 +24,10 @@ export default (state = {}, action) => {
       return {
         ...filteredData
       };
+      case "FETCH_INSTOCK_PRODUCT":
+        return {
+          ..._.mapKeys(action.payload.products, "inStock"===true)
+        };
 
     default:
       return state;

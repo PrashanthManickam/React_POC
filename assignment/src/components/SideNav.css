@@ -5,3 +5,17 @@
     padding-left: 140px;
     width: 700px;
 }
+.MuiTypography-noWrap {
+    /* -webkit-text-stroke: thin; */
+    color: aliceblue;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.container{
+    padding-left: 25px;
+}
+.makeStyles-button-3{
+    justify-content: center;
+    display: flex;
+}

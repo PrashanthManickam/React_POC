@@ -28,3 +28,14 @@ export const fetchFilteredProduct = query => async dispatch => {
     // payload: response.data
   });
 };
+export const fetchInStockProduct = () => async dispatch => {
+  // console.log(query, "response in actions -- fetchFilteredProduct");
+  response = await products.get("/walmartproducts/1/3?search=mount&inStock=true");
+      console.log(response,'instock');
+  dispatch({
+    type: "FETCH_INSTOCK_PRODUCT",
+    payload: response.data
+    // payload: response.data
+
+  });
+};

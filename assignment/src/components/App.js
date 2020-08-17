@@ -2,6 +2,7 @@ import React,{Component} from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ProductList from "./ProductList";
 import ProductDetail from "./ProductDetail";
+import SideNav from "./SideNav";
 
 
 export class App extends Component {
