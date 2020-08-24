@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import SearchBar from "material-ui-search-bar";
 import { fetchFilteredProduct } from "../actions";
+import { fetchProducts } from "../actions";
 
 class SearchComponent extends Component {
   state = { query: "" };
@@ -12,6 +13,12 @@ class SearchComponent extends Component {
     this.props.fetchFilteredProduct(this.state.query.toLowerCase());
   };
 
+  cancelSearch = () =>{
+    this.setState({
+      query:""
+    })
+    this.props.fetchProducts();
+  }
   render() {
     console.log(this.state.query, "query");
     return (
@@ -22,6 +29,7 @@ class SearchComponent extends Component {
           margin: "0 auto",
           maxWidth: 800,
         }}
+        onCancelSearch={()=>this.cancelSearch()}
       />
     );
   }
@@ -32,6 +40,6 @@ const mapStateToProps = (state) => {
   return { product: filteredArray };
 };
 
-export default connect(mapStateToProps, { fetchFilteredProduct })(
+export default connect(mapStateToProps, { fetchFilteredProduct,fetchProducts })(
   SearchComponent
 );
